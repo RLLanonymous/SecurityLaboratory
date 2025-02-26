@@ -1,8 +1,11 @@
 <div align="center">
 <h1>SecurityLaboratory</h1>
+  
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/RLLanonymous/SecurityLaboratory/total?style=for-the-badge&color=%23076e20)
+![GitHub Release](https://img.shields.io/github/v/release/RLLanonymous/SecurityLaboratory?include_prereleases&sort=date&display_name=release&style=for-the-badge)
 
 
-![Alt](https://repobeats.axiom.co/api/embed/c7b20d261f0e6247f8bb9890c434f518ca76613b.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/108ed6c1d02b37ae79c489b111d7bab1c4210f00.svg "Repobeats analytics image")
 
 
 **SecurityLaboratory** is a custom plugin for **SCP: Secret Laboratory** that integrates a Discord bot for admin management. It allows server administrators to manage logs, bans, kicks, and other features directly from Discord using slash commands.
@@ -29,6 +32,10 @@
 - This plugin uses [Discord.Net](https://docs.discordnet.dev/) for integration with Discord API.
 
 ![image](https://github.com/user-attachments/assets/89b1f414-0f8a-4eed-922c-76c0a79d035e)
+
+## License 
+
+- This Repository is licensed under **[AGPL-3.0 license](https://www.gnu.org/licenses/agpl-3.0.html)**.
 
 ## Support
 
