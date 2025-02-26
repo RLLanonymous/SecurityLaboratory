@@ -21,7 +21,14 @@
 ## Credits
 
 - **SecurityLaboratory** is **inspired** by [DiscordLab](https://github.com/DiscordLabSCP/DiscordLab) by LumiFae.
+  
 - This plugin uses [Exiled](https://github.com/ExMod-Team/EXILED) for integration with SCP:SL servers.
+
+![image](https://github.com/user-attachments/assets/729352e8-6279-4770-92f2-84a2a1b59cae) 
+
+- This plugin uses [D#+](https://github.com/DSharpPlus/DSharpPlus) for integration with Discord API.
+
+![image](https://github.com/user-attachments/assets/83d7601a-96b1-4abd-b741-bd05511ea387)
 
 ## Support
 
