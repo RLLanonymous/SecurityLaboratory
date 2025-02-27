@@ -32,7 +32,7 @@ namespace SecurityLaboratory.Commands
             catch (Exception ex)
             {
                 await command.FollowupAsync($"An error occurred while trying to restart the server: {ex.Message}", ephemeral: false);
-                Log.Debug($"An error occurred while trying to restart the server: {ex.Message}");
+                Log.Error($"An error occurred while trying to restart the server: {ex.Message}");
             }
         }
     }

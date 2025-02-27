@@ -27,7 +27,6 @@ namespace SecurityLaboratory
         public override void OnEnabled()
         {
             Instance = this;
-
             if(Config.Token is "token" or "")
             {
                 Log.Error("Please set the bot token in the config file.");
@@ -36,9 +35,7 @@ namespace SecurityLaboratory
 
             if (Config.GuildId is 0)
             {
-                Log.Warn("You have no guild ID set in the config file, you might get errors until you set it. " +
-                         "If you plan on having guild IDs separate for every module then you can ignore this. " +
-                         "For more info go to here: https://github.com/DiscordLabSCP/DiscordLab/wiki/Installation#guild-id");
+                Log.Warn("You have no guild ID set in the config file, you might get errors until you set it. ");
             }
 
             string restartAfterRoundsConfig = ConfigFile.ServerConfig.GetString("restart_after_rounds", "0");

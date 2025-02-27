@@ -23,6 +23,7 @@ namespace SecurityLaboratory.Handlers
         public void Init()
         {
             Instance = this;
+            Log.Debug("Bot Init has started.");
             DiscordSocketConfig config = new()
             {
                 GatewayIntents = GatewayIntents.Guilds | GatewayIntents.GuildMessages,
@@ -69,9 +70,9 @@ namespace SecurityLaboratory.Handlers
             try
             {
                 await Client.LoginAsync(TokenType.Bot, SecurityLaboratory.Instance.Config.Token);
-                Log.Info("Bot successfully logged in.");
+                Log.Debug("Bot successfully logged in.");
                 await Client.StartAsync();
-                Log.Info("Bot started successfully.");
+                Log.Debug("Bot started successfully.");
             }
             catch (Exception ex)
             {
@@ -102,7 +103,7 @@ namespace SecurityLaboratory.Handlers
                     SocketGuild guild = GetGuild(command.GuildId);
                     if (guild == null)
                     {
-                        Log.Warn($"Command {command.Data.Name} failed to register, couldn't find guild {command.GuildId} (from module) nor {SecurityLaboratory.Instance.Config.GuildId} (from the bot). Make sure your guild IDs are correct.");
+                        Log.Error($"Command {command.Data.Name} failed to register, couldn't find guild {command.GuildId} (from module) nor {SecurityLaboratory.Instance.Config.GuildId} (from the bot). Make sure your guild IDs are correct.");
                         continue;
                     }
                     await guild.CreateApplicationCommandAsync(command.Data.Build());
