@@ -12,9 +12,13 @@ namespace SecurityLaboratory
         [Description("The token of the bot.")] 
         public string Token { get; set; } = "token";
         
-        [Description("The default guild where the bot will be used. You can set this individually for each module, but if a module doesn't have a guild id set, it will use this one.")]
+        [Description("The guild Id where the bot will be used.")]
         public ulong GuildId { get; set; } = new();
         
-        
+        [Description("The channel Id of the Moderations Logs.")] 
+        public ulong ModerationLogsChannelId { get; set; } = new();
+                
+        [Description("The channel Id of the Logs.")] 
+        public ulong LogsChannelId { get; set; } = new();
     }
 }

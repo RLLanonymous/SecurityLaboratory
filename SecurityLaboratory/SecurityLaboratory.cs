@@ -3,9 +3,12 @@ using Exiled.API.Features;
 using Exiled.API.Enums;
 using Exiled.Loader;
 using GameCore;
+using PluginAPI.Events;
 using SecurityLaboratory.API.Modules;
+using SecurityLaboratory.EventHandlers.Moderation_Logs;
 using SecurityLaboratory.Handlers;
 using Log = Exiled.API.Features.Log;
+using Player = Exiled.Events.Handlers.Player;
 using UpdateStatus = System.Data.UpdateStatus;
 using Version = System.Version;
 
@@ -19,10 +22,13 @@ namespace SecurityLaboratory
         public override Version Version { get; } = new Version(1, 0, 0);
         public override PluginPriority Priority { get; } = PluginPriority.Highest;
         public override Version RequiredExiledVersion { get; } = new Version(9,5,0);
-
+        
         public static SecurityLaboratory Instance { get; private set; }
-
         private HandlerLoader _handlerLoader;
+        private OnBanned _banHandler;
+        private OnKicked _kickHandler;
+        private OnMuted _muteHandler;
+        private OnUnmuted _unmuteHandler;
 
         public override void OnEnabled()
         {
@@ -48,8 +54,23 @@ namespace SecurityLaboratory
             }
             _handlerLoader = new ();
             _handlerLoader.Load(Assembly);
-
-
+            
+            if (DiscordBot.Instance.Client != null)
+            {
+                _banHandler = new OnBanned(DiscordBot.Instance.Client);
+                _kickHandler = new OnKicked(DiscordBot.Instance.Client);
+                _muteHandler = new OnMuted(DiscordBot.Instance.Client);
+                _unmuteHandler = new OnUnmuted(DiscordBot.Instance.Client);
+                
+                Player.Banned += _banHandler.OnPlayerBanned;
+                Player.Kicked += _kickHandler.OnPlayerKicked;
+                Player.IssuingMute += _muteHandler.OnPlayerMute;
+                Player.RevokingMute += _unmuteHandler.OnPlayerUnmute;
+            }
+            else
+            {
+                Log.Warn("Discord isn't initialized properly to subscribe to exiled events!");
+            }
             base.OnEnabled();
         }
 
@@ -58,6 +79,24 @@ namespace SecurityLaboratory
             _handlerLoader.Unload();
             _handlerLoader = null;
             
+            if (_banHandler != null)
+            {
+                Player.Banned -= _banHandler.OnPlayerBanned;
+            }
+            if (_kickHandler != null)
+            {
+                Player.Kicked -= _kickHandler.OnPlayerKicked;
+            }
+
+            if (_muteHandler != null)
+            {
+                Player.IssuingMute -= _muteHandler.OnPlayerMute;
+            }
+            
+            if (_unmuteHandler != null)
+            {
+                Player.RevokingMute -= _unmuteHandler.OnPlayerUnmute;
+            }
             base.OnDisabled();
         }
     }
